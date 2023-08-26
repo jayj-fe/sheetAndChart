@@ -1,10 +1,12 @@
-import { loading } from "./loading";
-const loader = new loading();
+import loadingJs from "./loading";
+import Papa from "papaparse";
+import Highcharts from "highcharts";
+const loaderJs = new loadingJs();
 
-class approvalRating{
-  constructor(targetId = "approval-rating"){
+class SheetAndChart{
+  constructor(targetId = "sheet-chart"){
     this.targetId = targetId;
-    this.approvalRating = document.getElementById(this.targetId);
+    this.SheetAndChart = document.getElementById(this.targetId);
     this.defaultURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRervzNe8_P9ybdxWZQK3XtBS0ExtJdyDNq2wHj68CU88QaN2XrhvOkOxod7bEeb_lcJ0E5lvTF_nhe/pub?output=csv&gid=";
     this.device = navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/Windows Phone/i) ? "mobile" : "pc";
     this.title = "尹대통령 국정운영 지지율";
@@ -22,7 +24,7 @@ class approvalRating{
 
   drawingElement(){
     const innerHtml = `
-      <div class="approval-rating-header">
+      <div class="sheet-chart-header">
         <h1>${this.title}</h1>
         <button class="more-btn" type="button" id="${this.targetId}-more-btn"><svg id="Components_icon_search_32" data-name="Components/icon/search_32" xmlns="http://www.w3.org/2000/svg" width="12.061" height="12.057" viewBox="0 0 12.061 12.057"><g id="Oval" fill="none" stroke="#111" stroke-miterlimit="10" stroke-width="1.5"><ellipse cx="4.778" cy="4.777" rx="4.778" ry="4.777" stroke="none"/><ellipse cx="4.778" cy="4.777" rx="4.028" ry="4.027" fill="none"/></g><path id="Line" d="M3.063,3.065,0,0" transform="translate(7.937 7.931)" fill="none" stroke="#111" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.5"/></svg></button>
         <div class="percent-value">
@@ -32,13 +34,13 @@ class approvalRating{
           </p>
         </div>
       </div>
-      <div class="approval-rating-chart" id="${this.targetId}-chart"></div>
-      <p class="approval-rating-info" id="${this.targetId}-info"></p>
+      <div class="sheet-chart-chart" id="${this.targetId}-chart"></div>
+      <p class="sheet-chart-info" id="${this.targetId}-info"></p>
     `;
 
-    this.approvalRating.insertAdjacentHTML('afterbegin', innerHtml);
+    this.SheetAndChart.insertAdjacentHTML('afterbegin', innerHtml);
 
-    hkLoader.show(this.targetId);
+    loaderJs.show(this.targetId);
 
     this.chartElId = `${this.targetId}-chart`;
     this.chartEl = document.getElementById(this.chartElId);
@@ -83,7 +85,7 @@ class approvalRating{
         document.getElementById(`${this.targetId}-denial`).innerHTML = data.denial[data.denial.length-5] + "%";
         this.moreBtn.addEventListener('click', () => { this.layerOpen() });
 
-        hkLoader.remove(this.targetId);
+        // loaderJs.remove(this.targetId);
       });
     })
   }
@@ -150,7 +152,8 @@ class approvalRating{
   setChartOption(){
     Highcharts.setOptions({
       credits: {
-        type: 'line'
+        type: 'line',
+        enabled: false
       },
       chart: {
         events: {
@@ -174,9 +177,6 @@ class approvalRating{
         spacingRight: 0,
         spacingBottom: 0,
         backgroundColor: 'none',
-      },
-      credits: {
-        enabled: false
       },
       xAxis: {
         tickWidth: 1,
@@ -387,8 +387,8 @@ class approvalRating{
 
     this.layerDiv.setAttribute('id', 'ar-layer');
     this.layerDiv.setAttribute('class', 'ar-layer');
-    this.approvalRating.appendChild(this.dimmedEl);
-    this.approvalRating.appendChild(this.layerDiv);
+    this.SheetAndChart.appendChild(this.dimmedEl);
+    this.SheetAndChart.appendChild(this.layerDiv);
 
     const close = document.getElementById("ar-layer-close");
     const tab = document.getElementById("ar-layer-tab");
@@ -421,6 +421,6 @@ class approvalRating{
 
 document.addEventListener('readystatechange', (e) => {
   if (e.target.readyState === 'interactive') {
-    const approvalRatingElement = new approvalRating("approval-rating");
+    const SheetAndChartElement = new SheetAndChart("sheet-chart");
   }
 });

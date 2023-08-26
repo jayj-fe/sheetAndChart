@@ -6,6 +6,7 @@
 	$contentColor : #666;
 	$letterSpacing:-0.14px;
 	$chartBorderTop: 1px solid #ddd;
+	$imgUrl:'';
 
 	@mixin textHide($wi, $he) {
 		display:inline-block;
