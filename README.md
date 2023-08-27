@@ -10,7 +10,7 @@ Create a chart from what is written in Google Sheets.
 ![Sheet And Chart](./src/img/reademe_img.PNG)
   
 ## Demo
-- Demo : [URL Click🔥](jayj-fe.github.io/sheetAndChart/)
+- Demo : <a href="https://jayj-fe.github.io/sheetAndChart/" target="_blank">URL Click🔥</a>
 
 ## Tech stack
 
