@@ -1,12 +1,12 @@
 // ------------------------------
-// S:main - approval_rating
+// S:main - sheet-chart
 // ------------------------------
-.approval-rating{
+.sheet-chart{
 	$black : #111;
 	$contentColor : #666;
 	$letterSpacing:-0.14px;
 	$chartBorderTop: 1px solid #ddd;
-	$imgUrl:'';
+	$imgUrl:'../img';
 
 	@mixin textHide($wi, $he) {
 		display:inline-block;
@@ -16,17 +16,46 @@
 		text-indent:-9999px;
 	}
 
-	height:270px;
+	*{
+		padding:0;
+		margin:0;
+		box-sizing: border-box;
+	}
+	ul,li{
+		list-style:none;
+	}
+	button{
+		background:inherit;
+		border:none;
+		box-shadow:none;
+		border-radius:0;
+	}
+
+	height:auto;
 	padding:12px 10px 14px;
 	background:#f7f7f7;
-	
+
+	.dimmed{
+		display: none;
+		position: fixed;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 9999;
+		background: rgba(0,0,0,.4);
+		&.on{
+			display: block;
+		}
+	}
+
 	&-header{
 		position:relative;
 		display:flex;
 		justify-content:space-between;
 		flex-wrap: wrap;
 		padding-bottom:17px;
-		background-image: url('#{$imgUrl}/approval_rating/president_img.png');
+		background-image: url('#{$imgUrl}/president_img.png');
 		background-repeat: no-repeat;
 		$bgXvalue : calc( 100% - 10px);
 		background-position:$bgXvalue 100%;
@@ -107,9 +136,9 @@
 		top:50%;
 		left:50%;
 		transform:translate(-50%, -50%);
-		width:100%;
+		width:calc(100% - 20px);
 		height:auto;
-		padding:30px 20px 33px;
+		padding:30px 10px 33px;
 		background:#fff;
 		box-shadow: 0px 4px 20px #00000029;
 		border-radius: 3px;
@@ -152,10 +181,11 @@
 			button{
 				position:relative;
 				display:inline-block;
+				min-width:66px;
 				color:$contentColor;
 				padding: 0 7px;
 				margin-right:20px;
-				font-size:15px;
+				font-size:13px;
 				line-height:18px;
 				letter-spacing: -0.15px;
 
@@ -207,7 +237,7 @@
 		padding:25px 0 10px;
 		border:0;
 		border-bottom:1px solid #ddd;
-		background-image: url('#{$imgUrl}/approval_rating/president_img.png');
+		background-image: url('#{$imgUrl}/president_img.png');
 		background-repeat: no-repeat;
 		$bgXvalue : calc( 100% - 5px);
 		background-position:$bgXvalue 100%;
@@ -256,9 +286,9 @@
 @media (max-width: 767px) {
 	.home{
 		.aside-article{
-			.approval-rating,
+			.sheet-chart,
 			.ar-layer{
-				p.approval-rating-info,
+				p.sheet-chart-info,
 				.ar-layer-chartInfo{
 					font-size: 12px;
 					line-height: 16px;
@@ -272,7 +302,7 @@
 		}
 	}
 
-	.approval-rating{
+	.sheet-chart{
 		.highcharts-label.highcharts-tooltip.highcharts-color-undefined{
 			opacity: 1 !important;
 			visibility: inherit !important;
@@ -291,8 +321,8 @@
 }
 
 @media (min-width: 768px) {
-	.approval-rating{
-		height:270px;
+	.sheet-chart{
+		max-width:300px;
 		padding-top:15px;
 		
 		&-header{
@@ -309,7 +339,6 @@
 		}
 
 		&-chart{
-			width:300px;
 			margin-bottom:8px;
 		}
 
@@ -317,7 +346,6 @@
 			width:960px;
 			height:480px;
 			padding:40px 40px 42px 41px;
-			z-index:95;
 
 			h1{
 				margin-bottom:16px;
@@ -341,7 +369,7 @@
 
 				button{
 					padding:1px 7px;
-					margin-right:0;
+					font-size:15px;
 				}
 			}
 

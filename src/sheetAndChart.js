@@ -1,6 +1,6 @@
 import loadingJs from "./loading";
-import Papa from "papaparse";
-import Highcharts from "highcharts";
+import Papa from "../node_modules/papaparse";
+import Highcharts from "../node_modules/highcharts";
 const loaderJs = new loadingJs();
 
 class SheetAndChart{
@@ -28,9 +28,9 @@ class SheetAndChart{
         <h1>${this.title}</h1>
         <button class="more-btn" type="button" id="${this.targetId}-more-btn"><svg id="Components_icon_search_32" data-name="Components/icon/search_32" xmlns="http://www.w3.org/2000/svg" width="12.061" height="12.057" viewBox="0 0 12.061 12.057"><g id="Oval" fill="none" stroke="#111" stroke-miterlimit="10" stroke-width="1.5"><ellipse cx="4.778" cy="4.777" rx="4.778" ry="4.777" stroke="none"/><ellipse cx="4.778" cy="4.777" rx="4.028" ry="4.027" fill="none"/></g><path id="Line" d="M3.063,3.065,0,0" transform="translate(7.937 7.931)" fill="none" stroke="#111" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.5"/></svg></button>
         <div class="percent-value">
-          <p class="denial">부정<strong id="${this.targetId}-denial"></strong>
+          <p class="denial"><span>부정</span><strong id="${this.targetId}-denial"></strong>
           </p>
-          <p class="positive">긍정<strong id="${this.targetId}-positive"></strong>
+          <p class="positive"><span>긍정</span><strong id="${this.targetId}-positive"></strong>
           </p>
         </div>
       </div>
@@ -85,7 +85,7 @@ class SheetAndChart{
         document.getElementById(`${this.targetId}-denial`).innerHTML = data.denial[data.denial.length-5] + "%";
         this.moreBtn.addEventListener('click', () => { this.layerOpen() });
 
-        // loaderJs.remove(this.targetId);
+        loaderJs.remove(this.targetId);
       });
     })
   }
@@ -323,7 +323,7 @@ class SheetAndChart{
                 };
               },
               formatter: function () {
-                const clientWidth = document.querySelector('.ar-layer-chart').clientWidth;
+                const clientWidth = document.querySelector('.ar-layer-chart').clientWidth - 40;
                 const date = this.x.split('.');
                 return '<div class="tooltip-wrap" style="width:'+ clientWidth +'px;"><div class="tooltip-img"></div><div class="tooltip-flex">'+
                 this.points.reduce(function(s, point) {
