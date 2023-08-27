@@ -1,5 +1,4 @@
-
-export class loading{
+export default class loadingJs{
   constructor(){
     this.targetId = "loading-Element";
     this.targetEle = document.getElementById(this.targetId);
@@ -11,7 +10,7 @@ export class loading{
     this.loadingEle = document.createElement('div');
     this.loadingEle.classList.add('loading-element');
 
-    const innerHtml = `
+    this.loadingEle.innerHTML = `
       <div class="fixed-element">
         <div class="loader">Loading...</div>
         <div class="loader-info">데이터 준비중</div>
@@ -97,7 +96,6 @@ export class loading{
       </style>
     `;
 
-    this.loadingEle.innerHTML = innerHtml
     this.targetEle.appendChild(this.loadingEle);
   }
 
