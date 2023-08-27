@@ -7,7 +7,8 @@ class SheetAndChart{
   constructor(targetId = "sheet-chart"){
     this.targetId = targetId;
     this.SheetAndChart = document.getElementById(this.targetId);
-    this.defaultURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRervzNe8_P9ybdxWZQK3XtBS0ExtJdyDNq2wHj68CU88QaN2XrhvOkOxod7bEeb_lcJ0E5lvTF_nhe/pub?output=csv&gid=";
+    this.googleApiKey = "2PACX-1vTJkVv6S4u6xCfEv0bI-uq9qrJkMKClpNHlSsqBg9vnQbrmY9kF-fh0RsLP0EMDcxPowVrJYpxTFiF0";
+    this.defaultURL = `https://docs.google.com/spreadsheets/d/e/${this.googleApiKey}/pub?output=csv&gid=`;
     this.device = navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/Windows Phone/i) ? "mobile" : "pc";
     this.title = "尹대통령 국정운영 지지율";
     this.chartElId = null;
@@ -69,7 +70,10 @@ class SheetAndChart{
     const callApi = new Promise((resolve) => { resolve( this.getGoogleSheetData(0)) });
 
     callApi.then(()=>{
-      this.chartData = this.callData.splice(1);
+      this.chartData = this.callData.splice(1).sort(function(a, b){
+        return Number(a.id) - Number(b.id);
+      });;
+
       this.setChartData(0, ()=>{
         const data = this.chartData[0];
 
