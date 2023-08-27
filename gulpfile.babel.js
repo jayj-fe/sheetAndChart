@@ -8,7 +8,7 @@ const sass = require('gulp-sass')(require('sass'));
 const webserver = require("gulp-webserver");
 
 const paths = {
-  dist : ["dist"],
+  dist : ["docs"],
   src : ["src"]
 }
 
@@ -27,7 +27,7 @@ gulp.task("babel", function () {
     .pipe(rename(function (p) {
       p.basename += '.min';
     }))
-    .pipe(gulp.dest(`dist/js`));
+    .pipe(gulp.dest(`${paths.dist}/js`));
 });
 
 gulp.task("sass", function(){
