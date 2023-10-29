@@ -55,7 +55,7 @@
 		justify-content:space-between;
 		flex-wrap: wrap;
 		padding-bottom:17px;
-		background-image: url('#{$imgUrl}/president_img.png');
+		// background-image: url('#{$imgUrl}/president_img.png');
 		background-repeat: no-repeat;
 		$bgXvalue : calc( 100% - 10px);
 		background-position:$bgXvalue 100%;
@@ -237,7 +237,7 @@
 		padding:25px 0 10px;
 		border:0;
 		border-bottom:1px solid #ddd;
-		background-image: url('#{$imgUrl}/president_img.png');
+		// background-image: url('#{$imgUrl}/president_img.png');
 		background-repeat: no-repeat;
 		$bgXvalue : calc( 100% - 5px);
 		background-position:$bgXvalue 100%;
