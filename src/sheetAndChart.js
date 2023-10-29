@@ -10,7 +10,7 @@ class SheetAndChart{
     this.googleApiKey = "2PACX-1vTJkVv6S4u6xCfEv0bI-uq9qrJkMKClpNHlSsqBg9vnQbrmY9kF-fh0RsLP0EMDcxPowVrJYpxTFiF0";
     this.defaultURL = `https://docs.google.com/spreadsheets/d/e/${this.googleApiKey}/pub?output=csv&gid=`;
     this.device = navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/Windows Phone/i) ? "mobile" : "pc";
-    this.title = "尹대통령 국정운영 지지율";
+    this.title = "FrontEnd Technic";
     this.chartElId = null;
     this.chartEl = null;
     this.chartInfo = null;
@@ -29,9 +29,9 @@ class SheetAndChart{
         <h1>${this.title}</h1>
         <button class="more-btn" type="button" id="${this.targetId}-more-btn"><svg id="Components_icon_search_32" data-name="Components/icon/search_32" xmlns="http://www.w3.org/2000/svg" width="12.061" height="12.057" viewBox="0 0 12.061 12.057"><g id="Oval" fill="none" stroke="#111" stroke-miterlimit="10" stroke-width="1.5"><ellipse cx="4.778" cy="4.777" rx="4.778" ry="4.777" stroke="none"/><ellipse cx="4.778" cy="4.777" rx="4.028" ry="4.027" fill="none"/></g><path id="Line" d="M3.063,3.065,0,0" transform="translate(7.937 7.931)" fill="none" stroke="#111" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.5"/></svg></button>
         <div class="percent-value">
-          <p class="denial"><span>부정</span><strong id="${this.targetId}-denial"></strong>
+          <p class="denial"><span>Vue</span><strong id="${this.targetId}-denial"></strong>
           </p>
-          <p class="positive"><span>긍정</span><strong id="${this.targetId}-positive"></strong>
+          <p class="positive"><span>React</span><strong id="${this.targetId}-positive"></strong>
           </p>
         </div>
       </div>
@@ -85,8 +85,8 @@ class SheetAndChart{
           }
         })
 
-        document.getElementById(`${this.targetId}-positive`).innerHTML = data.positive[data.positive.length-5] + "%";
-        document.getElementById(`${this.targetId}-denial`).innerHTML = data.denial[data.denial.length-5] + "%";
+        document.getElementById(`${this.targetId}-positive`).innerHTML = data.positive[data.positive.length-5];
+        document.getElementById(`${this.targetId}-denial`).innerHTML = data.denial[data.denial.length-5];
         this.moreBtn.addEventListener('click', () => { this.layerOpen() });
 
         loaderJs.remove(this.targetId);
@@ -262,7 +262,7 @@ class SheetAndChart{
           return '<div class="tooltip-wrap"><div class="tooltip-flex">'+
             this.points.reduce(function(s, point) {
             return s + '<div class="tooltip-series" style="color:'+ point.color +';"><span style="background:'+ point.color +';"></span>' + point.series.name + '<b>' + 
-              point.y + '%</b></div>';
+              point.y + '</b></div>';
           }, '<p class="tooltip-date">' + this.x + '</p>' ) + '</div></div>';
         }
       },
@@ -277,6 +277,7 @@ class SheetAndChart{
 
   drawingChart({chartTarget, chartTargetInfo, chartData, callType}){
     const seriesStats = callType === "mini" ? false : true; 
+    const chartName = chartData.title === "JS Framework" ? { name1 : "React", name2 : "Vue"} : chartData.title === "CSS Trand" ? { name1 : "Tailwind", name2 : "SCSS" } : { name1 : "Vite", name2 : "Webpack" } 
 
     const chart = Highcharts.chart(chartTarget, {
       chart: callType === "mini" ? {height : 130, background:"none"} : {height: 275, background : "#fff"},
@@ -287,7 +288,7 @@ class SheetAndChart{
         categories: callType === "mini" || this.device === "mobile" ? chartData.minifyCategories : chartData.categories,
       },
       series: [{
-        name: '긍정',
+        name: chartName.name1,
         color:'#c9151e',
         showInLegend: false,
         marker: { lineColor: '#c9151e', fillColor: 'white', },
@@ -296,7 +297,7 @@ class SheetAndChart{
         pointPlacement: 'on',
         enableMouseTracking: seriesStats
       }, {
-        name: '부정',
+        name: chartName.name2,
         color:'#004ea2',
         showInLegend: false,
         marker: { lineColor: '#004ea2', fillColor: 'white', },
@@ -333,7 +334,7 @@ class SheetAndChart{
                 this.points.reduce(function(s, point) {
                   return s + '<div class="tooltip-series"><div style="color:'+point.series.color+'">' + point.series.name + '<b>' +
                     point.y + '%</b></div></div>';
-                }, '<b class="tooltip-date">20' + date[0] + '년 ' + date[1] + '월 ' + date[2] + '일' +'</b>' ) + '<div class="tooltip-ac">터치하여 날짜별 지지율을 확인하세요</div></div></div></div>';
+                }, '<b class="tooltip-date">20' + date[0] + '년 ' + date[1] + '월 ' + date[2] + '일' +'</b>' ) + '<div class="tooltip-ac">터치하여 날짜별 데이터를 확인하세요</div></div></div></div>';
               },
             },
           },
@@ -381,7 +382,7 @@ class SheetAndChart{
       <h1>${this.title}</h1>
       <button type="button" class="ar-layer-close" id="ar-layer-close"><svg xmlns="http://www.w3.org/2000/svg" width="18.121" height="18.121" viewBox="0 0 18.121 18.121"><g id="그룹_7193" data-name="그룹 7193" transform="translate(-1457.12 -355.939)"><g id="Components_icon_close_black_32" data-name="Components/icon/close_black_32" transform="translate(1458.181 357)"><g id="Group"><path id="Line_2_Copy_3" data-name="Line 2 Copy 3" d="M16,16,0,0" transform="translate(0 0)" fill="none" stroke="#000" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.5"/><path id="Line_2_Copy_3-2" data-name="Line 2 Copy 3" d="M0,16,16,0" transform="translate(0)" fill="none" stroke="#000" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.5"/></g></g></g></svg></button>
       <div class="ar-layer-tab" id="ar-layer-tab"></div>
-      <p class="ar-layer-pc-info">그래프를 클릭하여 날짜별 지지율을 확인하세요</p>
+      <p class="ar-layer-pc-info">그래프를 클릭하여 날짜별 데이터를 확인하세요</p>
       <div class="ar-layer-chart" id="ar-layer-chart"></div>
       <p class="ar-layer-chartInfo" id="ar-layer-chartInfo">
         * info<br>

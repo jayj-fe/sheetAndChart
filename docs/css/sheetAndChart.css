@@ -36,7 +36,6 @@
   justify-content: space-between;
   flex-wrap: wrap;
   padding-bottom: 17px;
-  background-image: url("../img/president_img.png");
   background-repeat: no-repeat;
   background-position: calc(100% - 10px) 100%;
   background-size: 80px;
@@ -194,7 +193,6 @@
   padding: 25px 0 10px;
   border: 0;
   border-bottom: 1px solid #ddd;
-  background-image: url("../img/president_img.png");
   background-repeat: no-repeat;
   background-position: calc(100% - 5px) 100%;
   background-size: 120px;
